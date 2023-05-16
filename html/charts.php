@@ -15,6 +15,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
@@ -74,14 +75,19 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
   </div>
 </nav>
   
-<div class="container-fluid text-center">  
-  <div class="row content">
-    <div class="col-sm-12 text-left"> 
-      <h1>About us:</h1>
-      <!-- <p>Our venture offers many IoT devices such as weather stations, home alarm systems and so on.</p> -->
-    </div>
-    </div>
+<div class="container">
+  <div>
+      <button id="btn-temperature">Temperature</button>
+      <button id="btn-humidity">Humidity</button>
+      <button id="btn-pressure">Pressure</button>
   </div>
+  <canvas id="temperature" style="width: 50%; display: inline-block;"></canvas>
+  <canvas id="humidity" style="width: 50%; display: none;"></canvas>
+  <canvas id="pressure" style="width: 50%; display: none;"></canvas>
 </div>
+
+
+<script src="chartshow.js"></script>
+
 </body>
 </html>
