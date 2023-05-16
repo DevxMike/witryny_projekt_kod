@@ -1,8 +1,11 @@
 <?php
 
 session_start();
+if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
+	header("location: index.php");
+}
 
-require_once("../../db_connection_data.php");
+require_once("db_connection_data.php");
 
 $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -29,6 +32,6 @@ foreach ($data as $row) {
     $chartData['log_id'][] = $row['LOG_ID'];
 }
 
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 echo json_encode($chartData);
-?>
+?> 

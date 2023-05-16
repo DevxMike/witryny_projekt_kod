@@ -89,6 +89,37 @@ function get_data() {
         }
       }
     });
+
+    let air_quality = document.getElementById('air_quality').getContext('2d');
+    let massPopChart3 = new Chart(air_quality, {
+      type: 'line',
+      data: {
+        labels: data.time_stamp,
+        datasets: [{
+          label: 'Air Quality',
+          data: data.air_quality,
+          backgroundColor: '##FF000000',
+          borderColor: '##FF000000'
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            min: 0,
+            max: 100,
+            ticks: {
+              callback: function(value, index, values) {
+                return value + ' %';
+              }
+            }
+          }
+        }
+      }
+    });
+
+
+
+
   },
     error: function(xhr, status, error) {
     console.error('Wystąpił błąd podczas pobierania danych:', error);
@@ -100,24 +131,39 @@ document.getElementById('btn-temperature').addEventListener('click', function() 
   document.getElementById('temperature').style.display = 'inline-block';
   document.getElementById('humidity').style.display = 'none';
   document.getElementById('pressure').style.display = 'none';
+  document.getElementById('air_quality').style.display = 'none';
 });
 
 document.getElementById('btn-humidity').addEventListener('click', function() {
   document.getElementById('temperature').style.display = 'none';
   document.getElementById('humidity').style.display = 'inline-block';
   document.getElementById('pressure').style.display = 'none';
+  document.getElementById('air_quality').style.display = 'none';
 });
 
 document.getElementById('btn-pressure').addEventListener('click', function() {
   document.getElementById('temperature').style.display = 'none';
   document.getElementById('humidity').style.display = 'none';
   document.getElementById('pressure').style.display = 'inline-block';
+  document.getElementById('air_quality').style.display = 'none';
 });
+
+    document.getElementById('btn-air_quality').addEventListener('click', function() {
+    document.getElementById('temperature').style.display = 'none';
+    document.getElementById('humidity').style.display = 'none';
+    document.getElementById('pressure').style.display = 'none';
+    document.getElementById('air_quality').style.display = 'inline-block';
+  });
+
+  //document.getElementById('btn-refresh').addEventListener('click', get_data());
+
+
+
+
 
 }
 
-// how to update this scirpt every 5 seconds? 
-// https://stackoverflow.com/questions/729921/settimeout-or-setinterval
-// https://www.w3schools.com/jsref/met_win_setinterval.asp
+
+
+
 get_data();
-setInterval(get_data, 1000);

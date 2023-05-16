@@ -74,20 +74,70 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
     </div>
   </div>
 </nav>
-  
-<div class="container">
+
+
+
+<style>
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1%;
+  width: 80%;
+  margin-left: 5%;
+
+}
+
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 50%;
+}
+
+</style>
+
+
+
+
+<div class="button-container">
   <div>
       <button id="btn-temperature">Temperature</button>
       <button id="btn-humidity">Humidity</button>
       <button id="btn-pressure">Pressure</button>
+      <button id="btn-air_quality">Air Quality</button>
+      
   </div>
   <canvas id="temperature" style="width: 50%; display: inline-block;"></canvas>
   <canvas id="humidity" style="width: 50%; display: none;"></canvas>
   <canvas id="pressure" style="width: 50%; display: none;"></canvas>
-</div>
+  <canvas id="air_quality" style="width: 50%; display: none;"></canvas>
 
 
+
+
+
+
+<div class="chart-container">
 <script src="chartshow.js"></script>
+<button onclick="doTheFunction();">Refresh</button>
+<script>
+function doTheFunction(){
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET","get_data_from_db.php",true);
+    xmlhttp.send();
+}
+</script>
 
+
+
+
+
+</div>
+</div>
 </body>
 </html>
