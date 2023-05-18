@@ -1,13 +1,32 @@
 // Pobierz dane z serwera
-function get_data() {
-    $.ajax({
-      url: 'get_data_from_db.php',
-      type: 'GET',
-      dataType: 'json',
-      success: function(data) {
 
+function get_data(){
+fetch("get_data_from_db.php")
+    .then(response => response.json())
+    .then(data => {
+      drawChart(data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
+let massPopChart=null;
+let massPopChart1=null;
+let massPopChart2=null;
+let massPopChart3=null;
+
+function drawChart(data) {
+
+ 
+  
     // Wykres temperatury
     let temperature = document.getElementById('temperature').getContext('2d');
+    if (Chart.getChart("temperature")){
+
+      Chart.getChart("temperature").destroy();
+
+    }
     let massPopChart = new Chart(temperature, {
       type: 'line',
       data: {
@@ -36,6 +55,11 @@ function get_data() {
 
     // Wykres wilgotności
     let humidity = document.getElementById('humidity').getContext('2d');
+    if (Chart.getChart("humidity")){
+
+      Chart.getChart("humidity").destroy();
+
+    }
     let massPopChart1 = new Chart(humidity, {
       type: 'line',
       data: {
@@ -64,6 +88,11 @@ function get_data() {
 
     // Wykres ciśnienia
     let pressure = document.getElementById('pressure').getContext('2d');
+    if (Chart.getChart("pressure")){
+
+      Chart.getChart("pressure").destroy();
+
+    }
     let massPopChart2 = new Chart(pressure, {
       type: 'line',
       data: {
@@ -91,6 +120,11 @@ function get_data() {
     });
 
     let air_quality = document.getElementById('air_quality').getContext('2d');
+    if (Chart.getChart("air_quality")){
+
+      Chart.getChart("air_quality").destroy();
+
+    }
     let massPopChart3 = new Chart(air_quality, {
       type: 'line',
       data: {
@@ -98,8 +132,8 @@ function get_data() {
         datasets: [{
           label: 'Air Quality',
           data: data.air_quality,
-          backgroundColor: '##FF000000',
-          borderColor: '##FF000000'
+          backgroundColor: 'black',
+          borderColor: 'black'
         }]
       },
       options: {
@@ -117,15 +151,9 @@ function get_data() {
       }
     });
 
+    
 
-
-
-  },
-    error: function(xhr, status, error) {
-    console.error('Wystąpił błąd podczas pobierania danych:', error);
-    }
-  });
-
+  
 // Przełączanie wykresów
 document.getElementById('btn-temperature').addEventListener('click', function() {
   document.getElementById('temperature').style.display = 'inline-block';
@@ -154,16 +182,13 @@ document.getElementById('btn-pressure').addEventListener('click', function() {
     document.getElementById('pressure').style.display = 'none';
     document.getElementById('air_quality').style.display = 'inline-block';
   });
-
-  //document.getElementById('btn-refresh').addEventListener('click', get_data());
-
-
-
-
-
 }
-
-
-
-
+  //document.getElementById('btn-refresh').addEventListener('click', get_data());
+  
 get_data();
+
+
+//setInterval(function() {
+  //get_data();
+
+//}, 1000);

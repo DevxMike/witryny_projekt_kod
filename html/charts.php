@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
@@ -16,6 +17,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="text/javascript" src="chartshow.js"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
@@ -96,7 +98,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
   justify-content: center;
   align-items: center;
 
-  width: 50%;
+  width: 45%;
 }
 
 </style>
@@ -116,24 +118,17 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
   <canvas id="humidity" style="width: 50%; display: none;"></canvas>
   <canvas id="pressure" style="width: 50%; display: none;"></canvas>
   <canvas id="air_quality" style="width: 50%; display: none;"></canvas>
-
-
-
-
+ 
+ 
+<script>
+get_data();
+</script> 
 
 
 <div class="chart-container">
 <script src="chartshow.js"></script>
-<button onclick="doTheFunction();">Refresh</button>
-<script>
-function doTheFunction(){
-    xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET","get_data_from_db.php",true);
-    xmlhttp.send();
-}
-</script>
-
-
+<button onclick="get_data()">Refresh!</button>
+<canvas id="refresh" style="width: 50%; display: none; "></canvas>
 
 
 
