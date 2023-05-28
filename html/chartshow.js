@@ -21,6 +21,24 @@ function get_data_range() {
 
 
 
+ function download_chart() {
+
+  let base64Image = massPopChart.toBase64Image();
+
+  let currentDate = new Date();
+  let timezoneOffset = currentDate.getTimezoneOffset(); 
+  let adjustedDate = new Date(currentDate.getTime() - timezoneOffset);
+
+  let fileName = 'chart_' + adjustedDate.toLocaleString() + '.png';
+
+  let downloadLink = document.createElement('a');
+  downloadLink.href = base64Image;
+  downloadLink.download = fileName;
+  downloadLink.click();
+};
+
+
+
 let massPopChart=null;
 let massPopChart1=null;
 let massPopChart2=null;
@@ -160,8 +178,6 @@ function drawChart(data) {
     });
 
     
-
-  
 // Przełączanie wykresów
 document.getElementById('btn-temperature').addEventListener('click', function() {
   document.getElementById('temperature').style.display = 'inline-block';

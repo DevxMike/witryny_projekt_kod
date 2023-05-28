@@ -87,7 +87,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
   align-items: center;
   margin-top: 1%;
   width: 80%;
-  margin-left: 5%;
+  margin-left: 8%;
 
 }
 
@@ -122,9 +122,12 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
  
 
 
+ 
 
 <div class="chart-container">
 <script src="chartshow.js"></script>
+
+<div class="button-chart-container">
 
 <canvas id="refresh" style="width: 50%; display: none; "></canvas>
 <form id="dateRangeForm">
@@ -135,7 +138,9 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
 <input type="date" id="end-date" name="endDate">
 
   <button id="submit-btn" onclick="get_data_range()">Submit</button>
+  <button id="download-btn" onclick="download_chart()">Download chart</button>
 </form>
+</div>
 
 
 
