@@ -1,7 +1,14 @@
-// Pobierz dane z serwera
 
-function get_data(){
-fetch("get_data_from_db.php")
+
+
+
+
+function get_data_range() {
+  event.preventDefault();
+  let startDate = document.getElementById('start-date').value;
+  let endDate = document.getElementById('end-date').value;
+  
+  fetch("get_data_from_db.php?start_date=" + startDate + "&end_date=" + endDate)
     .then(response => response.json())
     .then(data => {
       drawChart(data);
@@ -10,6 +17,9 @@ fetch("get_data_from_db.php")
       console.error(error);
     });
 }
+// Pobierz dane z serwera
+
+
 
 let massPopChart=null;
 let massPopChart1=null;
@@ -18,8 +28,6 @@ let massPopChart3=null;
 
 function drawChart(data) {
 
- 
-  
     // Wykres temperatury
     let temperature = document.getElementById('temperature').getContext('2d');
     if (Chart.getChart("temperature")){
@@ -27,7 +35,7 @@ function drawChart(data) {
       Chart.getChart("temperature").destroy();
 
     }
-    let massPopChart = new Chart(temperature, {
+    massPopChart = new Chart(temperature, {
       type: 'line',
       data: {
         labels: data.time_stamp,
@@ -60,7 +68,7 @@ function drawChart(data) {
       Chart.getChart("humidity").destroy();
 
     }
-    let massPopChart1 = new Chart(humidity, {
+    massPopChart1 = new Chart(humidity, {
       type: 'line',
       data: {
         labels: data.time_stamp,
@@ -93,7 +101,7 @@ function drawChart(data) {
       Chart.getChart("pressure").destroy();
 
     }
-    let massPopChart2 = new Chart(pressure, {
+    massPopChart2 = new Chart(pressure, {
       type: 'line',
       data: {
         labels: data.time_stamp,
@@ -125,7 +133,7 @@ function drawChart(data) {
       Chart.getChart("air_quality").destroy();
 
     }
-    let massPopChart3 = new Chart(air_quality, {
+    massPopChart3 = new Chart(air_quality, {
       type: 'line',
       data: {
         labels: data.time_stamp,
@@ -182,13 +190,29 @@ document.getElementById('btn-pressure').addEventListener('click', function() {
     document.getElementById('pressure').style.display = 'none';
     document.getElementById('air_quality').style.display = 'inline-block';
   });
+
+  document.getElementById('submit-btn').addEventListener('click', function() {
+    // Obsługa wybierania zakresu dat
+    let startDate = document.getElementById('start-date').value;
+    let endDate = document.getElementById('end-date').value;
+    
+    // Przekazanie wybranych dat do funkcji get_data_range() do pobrania danych z określonego zakresu
+    get_data_range(startDate, endDate);
+  });
 }
-  //document.getElementById('btn-refresh').addEventListener('click', get_data());
   
-get_data();
 
 
-//setInterval(function() {
-  //get_data();
 
-//}, 1000);
+
+
+
+//get_data();
+
+
+/* If need to be interval
+setInterval(function() {
+  get_data();
+
+}, 1000);
+*/

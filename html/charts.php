@@ -17,7 +17,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script type="text/javascript" src="chartshow.js"></script>
+  <script type="text/javascript" defer src="chartshow.js"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
@@ -102,7 +102,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
 }
 
 </style>
-
+ 
 
 
 
@@ -120,15 +120,24 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false){
   <canvas id="air_quality" style="width: 50%; display: none;"></canvas>
  
  
-<script>
-get_data();
-</script> 
+
 
 
 <div class="chart-container">
 <script src="chartshow.js"></script>
-<button onclick="get_data()">Refresh!</button>
+
 <canvas id="refresh" style="width: 50%; display: none; "></canvas>
+<form id="dateRangeForm">
+<label for="start-date">Start Date:</label>
+<input type="date" id="start-date" name="startDate">
+
+<label for="end-date">End Date:</label>
+<input type="date" id="end-date" name="endDate">
+
+  <button id="submit-btn" onclick="get_data_range()">Submit</button>
+</form>
+
+
 
 
 
