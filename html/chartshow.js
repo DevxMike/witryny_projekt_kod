@@ -207,14 +207,7 @@ document.getElementById('btn-pressure').addEventListener('click', function() {
     document.getElementById('air_quality').style.display = 'inline-block';
   });
 
-  document.getElementById('submit-btn').addEventListener('click', function() {
-    // Obsługa wybierania zakresu dat
-    let startDate = document.getElementById('start-date').value;
-    let endDate = document.getElementById('end-date').value;
-    
-    // Przekazanie wybranych dat do funkcji get_data_range() do pobrania danych z określonego zakresu
-    get_data_range(startDate, endDate);
-  });
+
 }
   
 
